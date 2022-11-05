@@ -1,23 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react'
+import Home from './components/Home'
+import Header from './components/Header'
+import Nav from './components/Nav'
+import Stocks from './components/Stocks'
+import { useNavigate } from 'react-router-dom'
+
 
 function App() {
+
+  const [hideTitle, setHideTitle] = useState(false)
+  const [search, setSearch] = useState('')
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value)
+  }
+
+  let navigate = useNavigate()
+  
+  const searchStocks = () => {
+    navigate(`/stocks/${search.toUpperCase()}`)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Header hideTitle={hideTitle}/>
+        <Nav search={search} searchStocks={searchStocks} handleChange={handleSearchChange}/>
       </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home setHideTitle={setHideTitle}/>}/>
+          <Route path='/stocks/:ticker' element={<Stocks />}/>
+        </Routes>
+      </main>
     </div>
   );
 }
