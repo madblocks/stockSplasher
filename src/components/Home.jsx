@@ -1,5 +1,5 @@
 export default function Home () {
   return (
-    <div>Default Stock Data</div>
+    <div className='home'>Market Data</div>
   )
 }

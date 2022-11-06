@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Header from './components/Header'
 import Nav from './components/Nav'
 import Stocks from './components/Stocks'
+import Portfolio from './components/Portfolio'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -31,7 +32,8 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<Home setHideTitle={setHideTitle}/>}/>
+          <Route path='/' element={<Home setHideTitle={setHideTitle}/>}/>
+          <Route path='/portfolio' element={<Portfolio />}/>
           <Route path='/stocks/:ticker' element={<Stocks />}/>
         </Routes>
       </main>

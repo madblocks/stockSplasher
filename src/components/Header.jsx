@@ -1,7 +1,7 @@
 export default function Header () {
   return (
-    <div>
-      <div>Stocks Title</div>
+    <div className='title'>
+      <div>Chisel</div>
     </div>
   )
 }

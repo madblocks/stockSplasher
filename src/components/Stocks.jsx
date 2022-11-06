@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { request } from '../requests'
+import DisplayNav from './DisplayNav'
 
 
 
@@ -38,9 +39,12 @@ useEffect(() => {
   },[ticker])
 
   return (
-    <div>
-      <span>{ticker}</span><span>{stock.price}</span>
-      <div>{stock.daily_price_change}</div>
+    <div className="stocksContainer">
+      <DisplayNav />
+      <div className="stocksInfo">
+        <span>{ticker}</span><span>{stock.price}</span>
+        <div>{stock.daily_price_change}</div>
+      </div>
     </div>
   )
 }
