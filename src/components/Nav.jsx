@@ -14,7 +14,8 @@ const StyledLinks = styled.div`
     color: white;
   }
   .currentLink {
-    border-bottom: 2px solid white;
+    color: orange;
+    border-bottom: 2px solid orange;
   }
 `
 

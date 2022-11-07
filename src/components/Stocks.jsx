@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { request } from '../requests'
-import DisplayNav from './DisplayNav'
+import StocksDisplayNav from './StocksDisplayNav'
+import Error from './stocks/Error'
+
 
 
 
@@ -9,42 +11,46 @@ export default function Stocks () {
 
   let { ticker } = useParams()
 
-  const [stock, setStock] = useState([])
+  const [stock, setStock] = useState({error: false})
+  const [display, setDisplay] = useState({
+    general: true,
+    chart: false,
+    financials: false,
+    news: false
+  })
 
-  // useEffect(() => {
-  //   console.log(process.env.REACT_APP_DARQUBE_KEY)
-  //   const getStock = async () => {
-  //     let requestURL = `https://api.darqube.com/data-api/market_data/quote/TSLA?token=b68bf55a72e345fe868a01e8a6007aa9`
-  //     if (useCorsAnywhere) {
-  //       requestURL = corsAnywhere + requestURL
-  //     }
-  //     const response = await axios({
-  //       method: 'get',
-  //       url: requestURL 
-  //     })
-  //     console.log(response.data)
-  //     setStock(response.data)
-  //   } 
-  //   getStock(ticker)
-    
-  // },[useCorsAnywhere, ticker])
+  const handleDisplay = (e) => {
+    setDisplay({...display, [e.target.dataset.id]: !display[e.target.dataset.id]})
+  }
 
 useEffect(() => {
     const getStock = async () => {
+      setStock({error: false})
       const response = await request('darqube', 'stocks', ticker)
-      console.log(response.data)
-      setStock(response.data)
+        .catch(function (err){
+          console.log(err.response)
+          setStock({error: true})
+        })
+      if (response.data !== null) {
+        console.log(response)
+        setStock(response.data)
+      }
+      
     } 
     getStock(ticker)
   },[ticker])
 
   return (
     <div className="stocksContainer">
-      <DisplayNav />
-      <div className="stocksInfo">
-        <span>{ticker}</span><span>{stock.price}</span>
-        <div>{stock.daily_price_change}</div>
-      </div>
+      <StocksDisplayNav display={display} handleDisplay={handleDisplay}/>
+      {stock.error ? <Error /> : 
+        <div className="stocksInfo">
+          <span>{ticker}</span><span>{stock.price}</span>
+          <div>{stock.daily_price_change}</div>
+        </div>
+      }
+      
+      
     </div>
   )
 }
