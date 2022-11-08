@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react'
 import { request } from '../requests'
 import StocksDisplayNav from './StocksDisplayNav'
 import Error from './stocks/Error'
+import General from './stocks/General'
+import Chart from './stocks/Chart'
+import Financials from './stocks/Financials'
+import News from './stocks/News'
 
 
 
@@ -26,7 +30,7 @@ export default function Stocks () {
 useEffect(() => {
     const getStock = async () => {
       setStock({error: false})
-      const response = await request('darqube', 'stocks', ticker)
+      const response = await request('darqube', 'general', ticker)
         .catch(function (err){
           console.log(err.response)
           setStock({error: true})
@@ -44,9 +48,11 @@ useEffect(() => {
     <div className="stocksContainer">
       <StocksDisplayNav display={display} handleDisplay={handleDisplay}/>
       {stock.error ? <Error /> : 
-        <div className="stocksInfo">
-          <span>{ticker}</span><span>{stock.price}</span>
-          <div>{stock.daily_price_change}</div>
+        <div className='stocksInfo'>
+          <General stock={stock} isActive={display.general}/>
+          <Chart stock={stock} isActive={display.chart}/>
+          <Financials stock={stock} isActive={display.financials}/>
+          <News stock={stock} isActive={display.news}/>
         </div>
       }
       

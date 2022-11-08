@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+// https://api.darqube.com/data-api/fundamentals/stocks/general/TSLA?token=your_api_key
+
 export const request = (api, resource, ticker) => {
 
   let url = ''
@@ -9,7 +11,7 @@ export const request = (api, resource, ticker) => {
   }
   if (api === 'darqube') {
     url += 'https://api.darqube.com/data-api/'
-    if (resource === 'stocks') {
+    if (resource === 'quote') {
       url += 'market_data/quote/'
       url += `${ticker}?token=${process.env.REACT_APP_DARQUBE_KEY}`
     }
