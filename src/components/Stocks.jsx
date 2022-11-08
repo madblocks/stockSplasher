@@ -7,6 +7,7 @@ import General from './stocks/General'
 import Chart from './stocks/Chart'
 import Financials from './stocks/Financials'
 import News from './stocks/News'
+import Loading from './Loading'
 
 
 
@@ -38,11 +39,11 @@ useEffect(() => {
           setError({error: true})
         })
       if (response.data !== null) {
-        console.log(response)
-        setStock(response.data)
+        let symbol = response.data.ticker.split('.')[0]
+        setStock({...response.data, symbol: symbol})
       }
     } 
-    getStock(ticker)
+    getStock()
 
   },[ticker])
 
@@ -57,7 +58,7 @@ useEffect(() => {
             <Financials stock={stock} isActive={display.financials}/>
             <News stock={stock} isActive={display.news}/>
           </div>
-          : <h2>Loading...</h2>
+          : <Loading />
       }
       
       

@@ -65,3 +65,10 @@
 .stocksContainer {
   display: flex;
 }
+.stocksInfo {
+  margin-left: 40px;
+  width: calc(100% - 220px);
+}
+.colorpicker {
+  color: rgb(17, 207, 99);
+}

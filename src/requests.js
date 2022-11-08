@@ -1,14 +1,29 @@
 import axios from 'axios'
 
-// https://api.darqube.com/data-api/fundamentals/stocks/general/TSLA?token=your_api_key
-
 export const request = (api, resource, search) => {
 
   const darqube = {
     'api': 'https://api.darqube.com/data-api/',
-    'quote': 'market_data/quote/',
-    'general': 'fundamentals/stocks/general/',
-    'searchValue' : `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+    'quote': {
+      'resource': 'market_data/quote/',
+      'searchValue' : `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+    },
+    'general': {
+      'resource': 'fundamentals/stocks/general/',
+      'searchValue' : `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+    },
+    'reference': {
+      'resource': 'reference/stocks',
+      'searchValue': `?token=${process.env.REACT_APP_DARQUBE_KEY}&skip=0&limit=1000&symbol=${search}&country=United States&type=Common Stock`
+    },
+    'recommendation': {
+      'resource': 'fundamentals/stocks/analysts_recommendations/',
+      'searchValue' : `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+    },
+    'outstanding': {
+      'resource': 'fundamentals/stocks/outstanding_shares/',
+      'searchValue' : `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+    }
   }
 
   let url = ''
@@ -17,12 +32,10 @@ export const request = (api, resource, search) => {
     url += process.env.REACT_APP_CORSANYWHERE
   }
   if (api === 'darqube') {
-    url += darqube.api + darqube[resource] + darqube.searchValue
-    // url += 'https://api.darqube.com/data-api/'
-    // if (resource === 'quote') {
-    //   url += 'market_data/quote/'
-    //   url += `${ticker}?token=${process.env.REACT_APP_DARQUBE_KEY}`
-    // }
+    url += darqube.api + darqube[resource].resource + darqube[resource].searchValue
+  }
+  if (api === 'polygon') {
+
   }
 
   return (
