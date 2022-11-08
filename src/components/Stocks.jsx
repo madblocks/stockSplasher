@@ -15,7 +15,9 @@ export default function Stocks () {
 
   let { ticker } = useParams()
 
-  const [stock, setStock] = useState({error: false})
+  const [error, setError] = useState()
+  const [stock, setStock] = useState()
+  
   const [display, setDisplay] = useState({
     general: true,
     chart: false,
@@ -29,32 +31,38 @@ export default function Stocks () {
 
 useEffect(() => {
     const getStock = async () => {
-      setStock({error: false})
-      const response = await request('darqube', 'general', ticker)
+      setError({error: false})
+      const response = await request('darqube', 'quote', ticker)
         .catch(function (err){
           console.log(err.response)
-          setStock({error: true})
+          setError({error: true})
         })
       if (response.data !== null) {
         console.log(response)
         setStock(response.data)
       }
-      
     } 
     getStock(ticker)
+
   },[ticker])
 
   return (
     <div className="stocksContainer">
       <StocksDisplayNav display={display} handleDisplay={handleDisplay}/>
-      {stock.error ? <Error /> : 
-        <div className='stocksInfo'>
-          <General stock={stock} isActive={display.general}/>
-          <Chart stock={stock} isActive={display.chart}/>
-          <Financials stock={stock} isActive={display.financials}/>
-          <News stock={stock} isActive={display.news}/>
-        </div>
+      { error === true ? <Error /> : 
+        stock ?
+          <div className='stocksInfo'>
+            <General stock={stock} isActive={display.general}/>
+            <Chart stock={stock} isActive={display.chart}/>
+            <Financials stock={stock} isActive={display.financials}/>
+            <News stock={stock} isActive={display.news}/>
+          </div>
+          : <h2>Loading...</h2>
       }
+      
+      
+        
+      
       
       
     </div>

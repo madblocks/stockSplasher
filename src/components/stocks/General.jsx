@@ -1,5 +1,6 @@
-import { faBorderNone } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { request } from '../../requests'
 
 const StyledGeneralDisplay = styled.div`
   height: 200px;
@@ -11,7 +12,6 @@ const StyledGeneralDisplay = styled.div`
     border-bottom: 2px solid white;
   }
   .generalInfo {
-    ${'' /* ${({active}) => active ? null : 'display: none;'} */}
     color: green;
   }
 `
@@ -20,9 +20,20 @@ const hidden = {
   display: 'none'
 }
 
-// style={isActive ? block : hidden}
-
 export default function General ({stock, isActive}) {
+
+  const [generalInfo, setGeneralInfo] = useState()
+  
+  useEffect(() => {
+    const getGeneralInfo = async () => {
+      const response = await request('darqube', 'general', stock.ticker)
+      console.log(response)
+      setGeneralInfo(response.data)
+    }
+    getGeneralInfo(stock.ticker)
+    
+  }, [stock.ticker])
+
   return (
     <StyledGeneralDisplay active={isActive}>
       <div className='generalHeader'>

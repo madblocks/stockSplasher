@@ -2,7 +2,14 @@ import axios from 'axios'
 
 // https://api.darqube.com/data-api/fundamentals/stocks/general/TSLA?token=your_api_key
 
-export const request = (api, resource, ticker) => {
+export const request = (api, resource, search) => {
+
+  const darqube = {
+    'api': 'https://api.darqube.com/data-api/',
+    'quote': 'market_data/quote/',
+    'general': 'fundamentals/stocks/general/',
+    'searchValue' : `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+  }
 
   let url = ''
   const useCorsAnywhere = true
@@ -10,11 +17,12 @@ export const request = (api, resource, ticker) => {
     url += process.env.REACT_APP_CORSANYWHERE
   }
   if (api === 'darqube') {
-    url += 'https://api.darqube.com/data-api/'
-    if (resource === 'quote') {
-      url += 'market_data/quote/'
-      url += `${ticker}?token=${process.env.REACT_APP_DARQUBE_KEY}`
-    }
+    url += darqube.api + darqube[resource] + darqube.searchValue
+    // url += 'https://api.darqube.com/data-api/'
+    // if (resource === 'quote') {
+    //   url += 'market_data/quote/'
+    //   url += `${ticker}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+    // }
   }
 
   return (
