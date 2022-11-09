@@ -12,43 +12,51 @@ export const request = (api, resource, search) => {
     },
     'general': {
       'resource': 'fundamentals/stocks/general/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
     },
     'reference': {
       'resource': 'reference/stocks',
-      'searchValue': `?token=${process.env.REACT_APP_DARQUBE_KEY}&skip=0&limit=1000&symbol=${search}&country=United States&type=Common Stock`
+      'searchValue': `?${darqubeKey}&skip=0&limit=1000&symbol=${search}&country=United States&type=Common Stock`
     },
     'recommendation': {
       'resource': 'fundamentals/stocks/analysts_recommendations/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
     },
     'outstanding': {
       'resource': 'fundamentals/stocks/outstanding_shares/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
     },
     'dividends': {
       'resource': 'fundamentals/stocks/dividends/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
     },
     'epsHistorical': {
       'resource': 'fundamentals/stocks/eps_historical/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
     },
     'epsEst': {
       'resource': 'fundamentals/stocks/eps_trends/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
     },
     'balance': {
       'resource': 'fundamentals/stocks/balance_sheet/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
     },
     'income': {
       'resource': 'fundamentals/stocks/income_statement/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
     },
     'cashFlow': {
       'resource': 'fundamentals/stocks/cash_flow/',
-      'searchValue': `${search}?token=${process.env.REACT_APP_DARQUBE_KEY}`
+      'searchValue': `${search}?${darqubeKey}`
+    },
+    'news': {
+      'resource': 'fundamentals/media/news',
+      'searchValue': `?${darqubeKey}&symbol=${search}&skip=0&limit=20&sort=desc`
+    },
+    'tweets': {
+      'resource': 'fundamentals/media/tweets',
+      'searchValue': `?${darqubeKey}&symbol=${search}&skip=0&limit=100&sort=desc`
     }
   }
 

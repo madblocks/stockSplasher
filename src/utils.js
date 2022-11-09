@@ -40,7 +40,6 @@ export function findNextDate(datesListObj) {
       nextDate = date
     }
   }
-  console.log('nextDate ' + nextDate)
   return nextDate
 }
 
@@ -56,8 +55,6 @@ export function findLastDate(datesListObj) {
       lastDate = date
     }
   }
-  console.log('today' + today)
-  console.log('lastDate' + lastDateNum)
-  console.log('lastDate' + lastDate)
   return lastDate
 }
+

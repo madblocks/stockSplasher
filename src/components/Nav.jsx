@@ -5,13 +5,14 @@ import styled from 'styled-components'
 
 const StyledLinks = styled.div`
   
-  width: 180px;
+  width: 220px;
   display: flex;
   justify-content: space-between;
 
   .nav-link {
     text-decoration: none;
     color: white;
+    font-size: 20px;
   }
   .currentLink {
     color: orange;

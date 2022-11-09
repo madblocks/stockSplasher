@@ -23,8 +23,6 @@ const StyledDisplayLinks = styled.ul`
 
 export default function StocksDisplayNav (props) {
 
-  
-
   return (
     <StyledDisplayLinks>
       <li className={props.display.general ? 'active' : ''} onClick={props.handleDisplay} data-id='general'>General</li>
