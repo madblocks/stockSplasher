@@ -41,9 +41,9 @@ export default function Financials ({stock, isActive}) {
   const [dividends, setDividends] = useState()
   const [epsHistorical, setEpsHistorical] = useState()
   const [epsEst, setEpsEst] = useState()
-  const [balanceSheet, setBalanceSheet] = useState()
-  const [income, setIncome] = useState()
-  const [cashFlow, setCashFlow] = useState()
+  // const [balanceSheet, setBalanceSheet] = useState()
+  // const [income, setIncome] = useState()
+  // const [cashFlow, setCashFlow] = useState()
 
   useEffect(() => {
     const getOutstanding = async () => {
@@ -71,23 +71,23 @@ export default function Financials ({stock, isActive}) {
     }
     getEpsEst()
     
-    const getBalanceSheet = async () => {
-      const response = await request('darqube', 'balance', stock.symbol)
-      setBalanceSheet(response.data)
-    }
-    getBalanceSheet()
+    // const getBalanceSheet = async () => {
+    //   const response = await request('darqube', 'balance', stock.symbol)
+    //   setBalanceSheet(response.data)
+    // }
+    // getBalanceSheet()
 
-    const getIncome = async () => {
-      const response = await request('darqube', 'income', stock.symbol)
-      setIncome(response.data)
-    }
-    getIncome()
+    // const getIncome = async () => {
+    //   const response = await request('darqube', 'income', stock.symbol)
+    //   setIncome(response.data)
+    // }
+    // getIncome()
 
-    const getCashFlow = async () => {
-      const response = await request('darqube', 'cashFlow', stock.symbol)
-      setCashFlow(response.data)
-    }
-    getCashFlow()
+    // const getCashFlow = async () => {
+    //   const response = await request('darqube', 'cashFlow', stock.symbol)
+    //   setCashFlow(response.data)
+    // }
+    // getCashFlow()
   },[stock.symbol])
 
   return (outstanding && dividends && epsHistorical && epsEst) ? (
