@@ -56,12 +56,6 @@
   cursor: pointer;
 }
 /* Main */
-.home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 500px;
-}
 .stocksContainer {
   display: flex;
 }

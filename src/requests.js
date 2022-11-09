@@ -57,6 +57,10 @@ export const request = (api, resource, search) => {
     'tweets': {
       'resource': 'fundamentals/media/tweets',
       'searchValue': `?${darqubeKey}&symbol=${search}&skip=0&limit=100&sort=desc`
+    },
+    'topMovers': {
+      'resource': 'fundamentals/indexes/top_movers/',
+      'searchValue': `DJI?${darqubeKey}`
     }
   }
 
