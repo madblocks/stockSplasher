@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
-import { useState, useEffect, useContext } from 'react'
+import { useState } from 'react'
 import Home from './components/Home'
 import Header from './components/Header'
 import Nav from './components/Nav'

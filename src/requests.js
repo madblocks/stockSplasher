@@ -60,7 +60,7 @@ export const request = (api, resource, search) => {
     },
     'topMovers': {
       'resource': 'fundamentals/indexes/top_movers/',
-      'searchValue': `DJI?${darqubeKey}`
+      'searchValue': `${search}?${darqubeKey}`
     }
   }
 

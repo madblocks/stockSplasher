@@ -56,8 +56,11 @@ export default function Home () {
       'name': 'US Dollar'
     }
   })
-  
+
   useEffect(() => {
+
+    const tickers = ['DJI.INDX','NDX.INDX', 'GSPC.INDX', 'RUT.INDX', 'DXY.INDX']
+
     const getIndexes = async (index) => {
       const response = await request('darqube', 'quote', index)
       setIndexes(indexes => {
@@ -66,7 +69,7 @@ export default function Home () {
         )
       })
     }
-    for (const ticker in indexes) {
+    for (const ticker in tickers) {
       getIndexes(ticker)
     }
 
