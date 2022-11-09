@@ -49,7 +49,7 @@ const StyledGeneralDisplay = styled.div`
     max-width: 1000px;
     margin-top: 10px;
     display: grid;
-    grid-template-columns: 1fr 1fr 10% 1fr 1fr;
+    grid-template-columns: 1fr 1fr 7% 1fr 1fr;
     grid-gap: 5px;
   }
   .right {
@@ -105,10 +105,10 @@ export default function General ({stock, isActive}) {
             <div>Previous Close: </div><div className='right'>{stock.previous_close}</div>
             <div></div>
             <div>Exchange: </div><div className='right'>{generalInfo.Exchange}</div>
-            <div>Daily Change (%): </div><div className={isPositive(stock.daily_percentage_change) ? 'right increase' : 'right decrease'}>{stock.daily_percentage_change.toFixed(2)}</div>
+            <div>Daily Change %: </div><div className={isPositive(stock.daily_percentage_change) ? 'right increase' : 'right decrease'}>{stock.daily_percentage_change.toFixed(2)}</div>
             <div></div>
             <div>Currency: </div><div className='right'>{generalInfo.CurrencyCode}</div>
-            <div>Daily Change ($): </div><div className={isPositive(stock.daily_price_change) ? 'right increase' : 'right decrease'}>{stock.daily_price_change.toFixed(2)}</div>
+            <div>Daily Change $: </div><div className={isPositive(stock.daily_price_change) ? 'right increase' : 'right decrease'}>{stock.daily_price_change.toFixed(2)}</div>
             <div></div>
             <div>Sector: </div><div className='right'>{generalInfo.Sector}</div>
             <div>Recommendation: </div><div className='right'>{recommendation.recommendation}</div>

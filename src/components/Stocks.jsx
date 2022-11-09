@@ -54,8 +54,8 @@ useEffect(() => {
         stock ?
           <div className='stocksInfo'>
             <General stock={stock} isActive={display.general}/>
-            <Chart stock={stock} isActive={display.chart}/>
             <Financials stock={stock} isActive={display.financials}/>
+            <Chart stock={stock} isActive={display.chart}/>
             <News stock={stock} isActive={display.news}/>
           </div>
           : <Loading />

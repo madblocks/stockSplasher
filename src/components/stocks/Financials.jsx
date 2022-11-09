@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import { request } from '../../requests'
 import Loading from '../Loading'
-import { findNextDate, todaysDate } from '../../utils'
+import { findNextDate, findLastDate, todaysDate } from '../../utils'
 
 const StyledFinancialsDisplay = styled.div`
   border-top: 2px solid orange;
@@ -18,14 +18,20 @@ const StyledFinancialsDisplay = styled.div`
     max-width: 1000px;
     margin-top: 10px;
     display: grid;
-    grid-template-columns: 1fr 1fr 10% 1fr 1fr;
+    grid-template-columns: 1fr 1fr 7% 1fr 1fr;
     grid-gap: 5px;
+    margin-bottom: 20px;
   }
   .right {
     text-align: right;
   }
   .date {
-    font-size: 14px;
+    font-size: 12px;
+  }
+  .detail{
+    font-size: 12px;
+    color: lightgray;
+    text-align: left;
   }
 `
 
@@ -90,19 +96,22 @@ export default function Financials ({stock, isActive}) {
       <div className='grid'>
         <div>Outstanding Shares:</div><div className='right'>{outstanding[0].annual} (Million)</div>
         <div></div>
-        <div>Dividend (Annual Rate): </div><div className='right'>{dividends[dividends.length-1].annual_dividend_rate}</div>
-        <div>EPS: </div><div></div>
+        <div>Dividend <span className='detail'>(Annual Rate)</span>: </div><div className='right'>{dividends[dividends.length-1].annual_dividend_rate}</div>
+        <div>EPS <span className='detail'>({epsHistorical[findLastDate(epsHistorical)].date})</span>:</div>
+        <div className='right'>{
+          epsHistorical[findLastDate(epsHistorical)].epsActual
+        }</div>
         <div></div>
-        <div>Dividend <span className='date'>({
+        <div>Dividend <span className='detail'>({
           dividends[dividends.length-1].quarterly[dividends[dividends.length-1].quarterly.length-1].date
         })</span>: </div><div className='right'>{
           dividends[dividends.length-1].quarterly[dividends[dividends.length-1].quarterly.length-1].rate
         }</div>
-        <div>EPS (Estimate): </div><div>{
+        <div>EPS <span className='detail'>(Estimate)</span>: </div><div className='right'>{
           epsEst.earnings_estimate[findNextDate(epsEst.earnings_estimate)].earningsEstimateAvg
         }</div>
         <div></div>
-        <div></div><div></div>
+        <div>Revenue: </div><div></div>
       </div>
     </StyledFinancialsDisplay>
   ) : <Loading />

@@ -28,8 +28,8 @@ export default function StocksDisplayNav (props) {
   return (
     <StyledDisplayLinks>
       <li className={props.display.general ? 'active' : ''} onClick={props.handleDisplay} data-id='general'>General</li>
-      <li className={props.display.chart ? 'active' : ''} onClick={props.handleDisplay} data-id='chart'>Chart</li>
       <li className={props.display.financials ? 'active' : ''} onClick={props.handleDisplay} data-id='financials'>Financials</li>
+      <li className={props.display.chart ? 'active' : ''} onClick={props.handleDisplay} data-id='chart'>Chart</li>
       <li className={props.display.news ? 'active' : ''} onClick={props.handleDisplay} data-id='news'>News</li>
     </StyledDisplayLinks>
   )
