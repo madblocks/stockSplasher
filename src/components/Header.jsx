@@ -1,7 +1,7 @@
 export default function Header () {
   return (
     <div className='title'>
-      <div>Stock App</div>
+      <div>Stock Splasher</div>
     </div>
   )
 }
