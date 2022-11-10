@@ -66,9 +66,9 @@ export const request = (api, resource, search) => {
 
   let url = ''
   
-  if (process.env.REACT_APP_USE_CORS) {
-    url += process.env.REACT_APP_CORSANYWHERE
-  }
+  // if (process.env.REACT_APP_USE_CORS) {
+  //   url += process.env.REACT_APP_CORSANYWHERE
+  // }
   if (api === 'darqube') {
     url += darqube.api + darqube[resource].resource + darqube[resource].searchValue
   }
