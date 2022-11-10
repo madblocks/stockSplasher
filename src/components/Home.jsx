@@ -56,6 +56,8 @@ export default function Home () {
       'name': 'US Dollar'
     }
   })
+  const [topMoversNYSE, setTopMoversNYSE] = useState()
+  const [topMoversNASDAQ, setTopMoversNASDAQ] = useState()
 
   useEffect(() => {
 
@@ -69,16 +71,30 @@ export default function Home () {
         )
       })
     }
-    for (const ticker in tickers) {
+    for (const ticker of tickers) {
       getIndexes(ticker)
     }
 
   }, [])
 
+  useEffect(() => {
+    const getTopMoversNYSE = async () => {
+      const response = await request('darqube', 'topMovers', 'DJI.INDX')
+      setTopMoversNYSE(response.data)
+    }
+    getTopMoversNYSE()
+
+    const getTopMoversNASDAQ = async () => {
+      const response = await request('darqube', 'topMovers', 'NDX.INDX')
+      setTopMoversNASDAQ(response.data)
+    }
+    getTopMoversNASDAQ()
+  }, [])
+
   return (indexes) ? (
     <StyledMarkets>
       {Object.values(indexes).map(index => (
-        <div className='indexBox' key={index.ticker}>
+        <div className='indexBox' key={index.name}>
           <div className='title2'>{index.name}</div>
           <div className='quote'>{parseFloat(index.price).toFixed(2)}
             <span className={'change' + (isPositive(parseInt(index.daily_price_change)) ? ' increase' : ' decrease')}>{parseFloat(index.daily_price_change).toFixed(2)} ({parseFloat(index.daily_percentage_change).toFixed(2)}%)</span>

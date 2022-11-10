@@ -86,7 +86,6 @@ export default function General ({stock, isActive}) {
   useEffect(() => {
     const getRecommendation = async () => {
       const response = await request('darqube', 'recommendation', stock.symbol)
-      console.log(response.data)
       setRecommendation(response.data)
     }
     getRecommendation()

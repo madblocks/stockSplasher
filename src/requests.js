@@ -56,7 +56,7 @@ export const request = (api, resource, search) => {
     },
     'tweets': {
       'resource': 'fundamentals/media/tweets',
-      'searchValue': `?${darqubeKey}&symbol=${search}&skip=0&limit=100&sort=desc`
+      'searchValue': `?${darqubeKey}&symbol=${search}&skip=0&limit=20&sort=desc`
     },
     'topMovers': {
       'resource': 'fundamentals/indexes/top_movers/',
@@ -65,8 +65,8 @@ export const request = (api, resource, search) => {
   }
 
   let url = ''
-  const useCorsAnywhere = true
-  if (useCorsAnywhere) {
+  
+  if (process.env.REACT_APP_USE_CORS) {
     url += process.env.REACT_APP_CORSANYWHERE
   }
   if (api === 'darqube') {
