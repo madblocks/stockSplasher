@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { isPositive } from '../../utils'
 import { request } from '../../requests'
+import { PortfolioContext } from '../../App'
 
 const StyledGeneralDisplay = styled.div`
   margin-top: 20px;
@@ -41,7 +42,7 @@ const StyledGeneralDisplay = styled.div`
   .decrease {
     color: red;
   }
-  #portIcon {
+  .portIcon {
     float: right;
   }
   .grid {
@@ -54,6 +55,9 @@ const StyledGeneralDisplay = styled.div`
   .right {
     text-align: right;
   }
+  .orange {
+    color: orange;
+  }
 `
 
 const hidden = {
@@ -65,6 +69,7 @@ export default function General ({stock, isActive}) {
   const [generalInfo, setGeneralInfo] = useState()
   const [stockRef, setStockRef] = useState()
   const [recommendation, setRecommendation] = useState()
+  const {portfolio, setPortfolio} = useContext(PortfolioContext)
   
   useEffect(() => {
     const getGeneralInfo = async () => {
@@ -89,6 +94,23 @@ export default function General ({stock, isActive}) {
     }
     getRecommendation()
   }, [stock.symbol])
+
+  const handlePortfolio = (e) => {
+    if (portfolio[stock.symbol]) {
+      setPortfolio(portfolio => {
+        delete portfolio[stock.symbol]
+        return (
+          {...portfolio}
+        )
+      })
+    } else {
+      setPortfolio({...portfolio, [stock.symbol]: stock})
+    }
+  }
+
+  const inPortfolio = () => {
+    return portfolio[stock.symbol]
+  }
   
     return (generalInfo && stockRef && recommendation) ? (
       <StyledGeneralDisplay active={isActive}>
@@ -96,7 +118,8 @@ export default function General ({stock, isActive}) {
           <div id='name'>{stockRef.name}</div>
           <span id='ticker'>{stock.symbol}</span><span id='price'>{stock.price}</span>
           <span id='priceChange' className={isPositive(stock.daily_percentage_change) ? 'increase' : 'decrease'}>({stock.daily_percentage_change.toFixed(2)}%)</span>
-          <FontAwesomeIcon icon={faStar} id='portIcon'/>
+          <FontAwesomeIcon icon={inPortfolio() ? faStarSolid : faStar} className={'portIcon' + (inPortfolio() ? ' orange' : '')}
+            onClick={handlePortfolio}/>
         </div>
         <div style={isActive ? null : hidden } className='generalInfo'>
           <div className='grid'>

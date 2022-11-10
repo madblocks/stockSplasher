@@ -95,17 +95,17 @@ export default function Financials ({stock, isActive}) {
       <div className='grid'>
         <div>Outstanding Shares:</div><div className='right'>{outstanding[0].annual} (Million)</div>
         <div></div>
-        <div>Dividend <span className='detail'>(Annual Rate)</span>: </div><div className='right'>{dividends[dividends.length-1].annual_dividend_rate}</div>
+        {/* <div>Dividend <span className='detail'>(Annual Rate)</span>: </div><div className='right'>{(dividends[dividends.length-1].annual_dividend_rate) ? (dividends[dividends.length-1].annual_dividend_rate) : null}</div> */}
         <div>EPS <span className='detail'>({epsHistorical[findLastDate(epsHistorical)].date})</span>:</div>
         <div className='right'>{
           epsHistorical[findLastDate(epsHistorical)].epsActual
         }</div>
         <div></div>
-        <div>Dividend <span className='detail'>({
+        {/* <div>Dividend <span className='detail'>({
           dividends[dividends.length-1].quarterly[dividends[dividends.length-1].quarterly.length-1].date
         })</span>: </div><div className='right'>{
           dividends[dividends.length-1].quarterly[dividends[dividends.length-1].quarterly.length-1].rate
-        }</div>
+        }</div> */}
         <div>EPS <span className='detail'>(Estimate)</span>: </div><div className='right'>{
           epsEst.earnings_estimate[findNextDate(epsEst.earnings_estimate)].earningsEstimateAvg
         }</div>

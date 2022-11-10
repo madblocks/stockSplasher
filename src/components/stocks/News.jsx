@@ -176,7 +176,7 @@ export default function News ({stock, isActive}) {
       {
         tweets.map((tweet) => {
           return (
-            <div className='article' key={tweet.text}>
+            <div className='article' key={`${tweet.text}+${tweet.uname}`}>
               <FontAwesomeIcon icon={faTwitterSquare} id='tweetIcon'/>
               <div>
                 <div className='source'>{tweet.uname}</div>
