@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { isPositive } from '../../utils'
 import { request } from '../../requests'
-import Loading from '../Loading'
 
 const StyledGeneralDisplay = styled.div`
   margin-top: 20px;
@@ -117,5 +116,5 @@ export default function General ({stock, isActive}) {
         </div>
       </StyledGeneralDisplay>
     )
-    : <Loading />
+    : null
 }

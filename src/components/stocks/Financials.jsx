@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import { request } from '../../requests'
-import Loading from '../Loading'
 import { findNextDate, findLastDate, todaysDate } from '../../utils'
 
 const StyledFinancialsDisplay = styled.div`
@@ -114,5 +113,5 @@ export default function Financials ({stock, isActive}) {
         <div>Revenue: </div><div></div>
       </div>
     </StyledFinancialsDisplay>
-  ) : <Loading />
+  ) : null
 }

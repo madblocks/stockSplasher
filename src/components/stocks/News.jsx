@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { request } from '../../requests'
-import Loading from '../Loading'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 
@@ -190,5 +189,5 @@ export default function News ({stock, isActive}) {
       }
       </div>
     </StyledNewsDisplay>
-  ) : <Loading />
+  ) : null
 }
